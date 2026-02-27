@@ -1,5 +1,5 @@
 app = 'native-plant-nursery-i9or-w'
-primary_region = 'iad'
+primary_region = 'ams'
 
 [build]
 
