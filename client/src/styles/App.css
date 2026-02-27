@@ -659,6 +659,201 @@ a:hover {
   padding-top: 0.75rem;
 }
 
+/* === Admin === */
+.admin-login {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+.admin-login-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.admin-login-card h1 {
+  color: #1b5e20;
+  margin-bottom: 0.25rem;
+}
+
+.admin-login-subtitle {
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.admin-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 2px solid #c8e6c9;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 1rem;
+}
+
+.admin-input:focus {
+  border-color: #2e7d32;
+}
+
+.admin-error {
+  color: #c62828;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard h1 {
+  color: #1b5e20;
+  font-size: 2rem;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e8f5e9;
+  padding-bottom: 0;
+}
+
+.admin-tab {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s;
+}
+
+.admin-tab:hover {
+  color: #2e7d32;
+}
+
+.admin-tab.active {
+  color: #2e7d32;
+  border-bottom-color: #2e7d32;
+}
+
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.admin-section-header h2 {
+  color: #1b5e20;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table th, .admin-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+  background: #f5f0eb;
+  font-weight: 600;
+  color: #555;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.admin-table .italic {
+  font-style: italic;
+  color: #888;
+}
+
+.admin-actions-cell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-form-container {
+  max-width: 500px;
+}
+
+.admin-form-container h2 {
+  color: #1b5e20;
+  margin-bottom: 1.5rem;
+}
+
+.admin-form {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.admin-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.admin-form label .admin-input {
+  margin-top: 0.25rem;
+}
+
+.admin-form select.admin-input {
+  appearance: auto;
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.admin-form-actions .submit-btn {
+  flex: 1;
+}
+
+.admin-form-actions .btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.admin-orders h2 {
+  color: #1b5e20;
+  margin-bottom: 1.5rem;
+}
+
 /* === Responsive === */
 @media (max-width: 768px) {
   .dashboard-layout {

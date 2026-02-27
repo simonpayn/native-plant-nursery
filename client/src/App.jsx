@@ -4,6 +4,7 @@ import PlantCatalog from './components/PlantCatalog';
 import Cart from './components/Cart';
 import OrderConfirmation from './components/OrderConfirmation';
 import OrdersDashboard from './components/OrdersDashboard';
+import Admin from './components/Admin';
 
 export default function App() {
   const { itemCount } = useCart();
@@ -22,6 +23,7 @@ export default function App() {
             <Link to="/cart" className="nav-link cart-link">
               Cart {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
             </Link>
+            <Link to="/admin" className="nav-link">Admin</Link>
           </nav>
         </div>
       </header>
@@ -31,6 +33,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
           <Route path="/orders" element={<OrdersDashboard />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
     </div>
