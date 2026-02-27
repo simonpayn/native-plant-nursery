@@ -27,6 +27,12 @@ export default function OrderConfirmation() {
         <p className="order-number">Order #{order.id}</p>
       </div>
       <div className="confirmation-details">
+        <h2>Contact Details</h2>
+        <p><strong>Name:</strong> {order.customer_name}</p>
+        <p><strong>Email:</strong> {order.customer_email}</p>
+        <p><strong>Phone:</strong> {order.customer_phone}</p>
+      </div>
+      <div className="confirmation-details">
         <h2>Order Summary</h2>
         <div className="confirmation-items">
           {order.items.map((item) => (

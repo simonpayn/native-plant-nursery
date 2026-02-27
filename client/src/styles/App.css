@@ -421,6 +421,45 @@ a:hover {
   color: #1b5e20;
 }
 
+/* === Contact Form === */
+.contact-form {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.contact-form h2 {
+  color: #1b5e20;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.contact-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.contact-input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 2px solid #c8e6c9;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-top: 0.25rem;
+}
+
+.contact-input:focus {
+  border-color: #2e7d32;
+}
+
 /* === Order Confirmation === */
 .order-confirmation {
   max-width: 600px;
@@ -649,6 +688,22 @@ a:hover {
   font-size: 0.9rem;
   color: #666;
   margin-top: 0.25rem;
+}
+
+.order-contact-info {
+  background: #f5f0eb;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+
+.order-contact-info p {
+  margin-bottom: 0.25rem;
+}
+
+.order-contact-info p:last-child {
+  margin-bottom: 0;
 }
 
 .order-detail-total {
