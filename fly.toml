@@ -1,4 +1,4 @@
-app = 'native-plant-nursery'
+app = 'simonpayn-native-plant-nursery'
 primary_region = 'iad'
 
 [build]
