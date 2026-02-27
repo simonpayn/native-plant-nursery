@@ -27,7 +27,6 @@ COPY --from=frontend /app/client/dist ./client/dist
 
 # Seed the database on first run, then start the server
 ENV PORT=8080
-ENV DB_PATH=/data/nursery.db
 EXPOSE 8080
 
-CMD ["sh", "-c", "mkdir -p /data && cd server && node seed.js && node index.js"]
+CMD ["sh", "-c", "cd server && node seed.js && node index.js"]
