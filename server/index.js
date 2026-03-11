@@ -39,6 +39,9 @@ function requireAdmin(req, res, next) {
   next();
 }
 
+// Health check for Fly.io
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
 // Public API routes (customers can browse plants and create/view orders)
 app.use('/api/plants', plantsRouter);
 app.use('/api/orders', ordersRouter);
