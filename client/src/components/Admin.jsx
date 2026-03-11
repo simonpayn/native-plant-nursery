@@ -35,7 +35,7 @@ export default function Admin() {
           Orders
         </button>
       </div>
-      {tab === 'plants' ? <AdminPlants token={token} /> : <AdminOrders token={token} />}
+      {tab === 'plants' ? <AdminPlants token={token} onLogout={handleLogout} /> : <AdminOrders token={token} onLogout={handleLogout} />}
     </div>
   );
 }

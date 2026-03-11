@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function AdminOrders({ token }) {
+export default function AdminOrders({ token, onLogout }) {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,8 +14,11 @@ export default function AdminOrders({ token }) {
 
   function fetchOrders() {
     fetch('/api/admin/orders', { headers })
-      .then((r) => r.json())
-      .then((data) => { setOrders(data); setLoading(false); })
+      .then((r) => {
+        if (r.status === 401) { onLogout(); return null; }
+        return r.json();
+      })
+      .then((data) => { if (Array.isArray(data)) { setOrders(data); } setLoading(false); })
       .catch(() => setLoading(false));
   }
 
