@@ -5,10 +5,15 @@ import { useCart } from '../context/CartContext';
 export default function Cart() {
   const { items, updateQuantity, removeFromCart, clearCart, total } = useCart();
   const [submitting, setSubmitting] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
   const navigate = useNavigate();
 
+  const contactComplete = customerName.trim() && customerEmail.trim() && customerPhone.trim();
+
   async function handleSubmit() {
-    if (items.length === 0) return;
+    if (items.length === 0 || !contactComplete) return;
     setSubmitting(true);
 
     try {
@@ -16,6 +21,9 @@ export default function Cart() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          customer_name: customerName.trim(),
+          customer_email: customerEmail.trim(),
+          customer_phone: customerPhone.trim(),
           items: items.map((item) => ({
             plant_id: item.plant.id,
             quantity: item.quantity,
@@ -85,6 +93,42 @@ export default function Cart() {
           </div>
         ))}
       </div>
+      <div className="contact-form">
+        <h2>Contact Information</h2>
+        <label className="contact-label">
+          Name
+          <input
+            type="text"
+            className="contact-input"
+            value={customerName}
+            onChange={(e) => setCustomerName(e.target.value)}
+            placeholder="Your full name"
+            required
+          />
+        </label>
+        <label className="contact-label">
+          Email
+          <input
+            type="email"
+            className="contact-input"
+            value={customerEmail}
+            onChange={(e) => setCustomerEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+        <label className="contact-label">
+          Phone
+          <input
+            type="tel"
+            className="contact-input"
+            value={customerPhone}
+            onChange={(e) => setCustomerPhone(e.target.value)}
+            placeholder="(555) 123-4567"
+            required
+          />
+        </label>
+      </div>
       <div className="cart-summary">
         <div className="cart-total">
           <span>Total:</span>
@@ -92,7 +136,7 @@ export default function Cart() {
         </div>
         <button
           onClick={handleSubmit}
-          disabled={submitting}
+          disabled={submitting || !contactComplete}
           className="submit-btn"
         >
           {submitting ? 'Submitting...' : 'Submit Order'}

@@ -28,7 +28,10 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     total REAL NOT NULL,
-    status TEXT NOT NULL DEFAULT 'pending'
+    status TEXT NOT NULL DEFAULT 'pending',
+    customer_name TEXT NOT NULL DEFAULT '',
+    customer_email TEXT NOT NULL DEFAULT '',
+    customer_phone TEXT NOT NULL DEFAULT ''
   );
 
   CREATE TABLE IF NOT EXISTS order_items (
@@ -42,18 +45,14 @@ db.exec(`
   );
 `);
 
-// Migrate existing databases to add new columns if missing
-const existingCols = db.prepare('PRAGMA table_info(plants)').all().map((c) => c.name);
-for (const [col, def] of [
-  ['description', 'TEXT'],
-  ['sun_requirements', 'TEXT'],
-  ['moisture_requirements', 'TEXT'],
-  ['type', 'TEXT'],
-  ['image_url', 'TEXT'],
-]) {
-  if (!existingCols.includes(col)) {
-    db.exec(`ALTER TABLE plants ADD COLUMN ${col} ${def}`);
-  }
+// Migrate: add contact columns to existing orders table
+const columns = db.prepare("PRAGMA table_info(orders)").all().map(c => c.name);
+if (!columns.includes('customer_name')) {
+  db.exec(`
+    ALTER TABLE orders ADD COLUMN customer_name TEXT NOT NULL DEFAULT '';
+    ALTER TABLE orders ADD COLUMN customer_email TEXT NOT NULL DEFAULT '';
+    ALTER TABLE orders ADD COLUMN customer_phone TEXT NOT NULL DEFAULT '';
+  `);
 }
 
 module.exports = db;

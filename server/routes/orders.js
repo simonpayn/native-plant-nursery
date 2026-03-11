@@ -4,14 +4,18 @@ const db = require('../db');
 
 // POST /api/orders — create a new order
 router.post('/', (req, res) => {
-  const { items } = req.body;
+  const { items, customer_name, customer_email, customer_phone } = req.body;
 
   if (!items || !Array.isArray(items) || items.length === 0) {
     return res.status(400).json({ error: 'Order must contain at least one item' });
   }
 
+  if (!customer_name || !customer_email || !customer_phone) {
+    return res.status(400).json({ error: 'Customer name, email, and phone are required' });
+  }
+
   const insertOrder = db.prepare(
-    'INSERT INTO orders (total, status) VALUES (?, ?)'
+    'INSERT INTO orders (total, status, customer_name, customer_email, customer_phone) VALUES (?, ?, ?, ?, ?)'
   );
   const insertItem = db.prepare(
     'INSERT INTO order_items (order_id, plant_id, quantity, unit_price) VALUES (?, ?, ?, ?)'
@@ -32,7 +36,7 @@ router.post('/', (req, res) => {
       resolvedItems.push({ ...item, unit_price: plant.price, plant });
     }
 
-    const orderResult = insertOrder.run(total, 'pending');
+    const orderResult = insertOrder.run(total, 'pending', customer_name, customer_email, customer_phone);
     const orderId = orderResult.lastInsertRowid;
 
     for (const item of resolvedItems) {
