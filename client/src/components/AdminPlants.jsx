@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const emptyPlant = { plant_name: '', common_name: '', availability_date: '', container_size: '4-inch pot', price: '', description: '', sun_requirements: '', moisture_requirements: '', type: '', image_url: '' };
 
-export default function AdminPlants({ token }) {
+export default function AdminPlants({ token, onLogout }) {
   const [plants, setPlants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null); // null = list view, 'new' = add form, id = edit form
@@ -19,8 +19,11 @@ export default function AdminPlants({ token }) {
 
   function fetchPlants() {
     fetch('/api/admin/plants', { headers })
-      .then((r) => r.json())
-      .then((data) => { setPlants(data); setLoading(false); })
+      .then((r) => {
+        if (r.status === 401) { onLogout(); return null; }
+        return r.json();
+      })
+      .then((data) => { if (Array.isArray(data)) { setPlants(data); } setLoading(false); })
       .catch(() => setLoading(false));
   }
 
