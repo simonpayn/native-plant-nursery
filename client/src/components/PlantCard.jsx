@@ -18,14 +18,25 @@ export default function PlantCard({ plant }) {
 
   return (
     <div className="plant-card">
+      {plant.image_url && (
+        <img src={plant.image_url} alt={plant.common_name} className="plant-card-image" />
+      )}
       <div className="plant-card-body">
         <h3 className="plant-common-name">{plant.common_name}</h3>
         <p className="plant-scientific-name">{plant.plant_name}</p>
+        {plant.description && (
+          <p className="plant-description">{plant.description}</p>
+        )}
         <div className="plant-details">
           <span className="plant-container">{plant.container_size}</span>
           <span className={`plant-availability ${isAvailable ? 'available' : 'upcoming'}`}>
             {isAvailable ? 'Available now' : `Available ${availDate.toLocaleDateString()}`}
           </span>
+        </div>
+        <div className="plant-tags">
+          {plant.type && <span className="plant-tag plant-tag-type">{plant.type}</span>}
+          {plant.sun_requirements && <span className="plant-tag plant-tag-sun">{plant.sun_requirements}</span>}
+          {plant.moisture_requirements && <span className="plant-tag plant-tag-moisture">{plant.moisture_requirements}</span>}
         </div>
         <p className="plant-price">${plant.price.toFixed(2)}</p>
       </div>

@@ -16,7 +16,12 @@ db.exec(`
     common_name TEXT NOT NULL,
     availability_date TEXT NOT NULL,
     container_size TEXT NOT NULL,
-    price REAL NOT NULL
+    price REAL NOT NULL,
+    description TEXT,
+    sun_requirements TEXT,
+    moisture_requirements TEXT,
+    type TEXT,
+    image_url TEXT
   );
 
   CREATE TABLE IF NOT EXISTS orders (
