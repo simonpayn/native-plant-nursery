@@ -16,7 +16,12 @@ db.exec(`
     common_name TEXT NOT NULL,
     availability_date TEXT NOT NULL,
     container_size TEXT NOT NULL,
-    price REAL NOT NULL
+    price REAL NOT NULL,
+    description TEXT,
+    sun_requirements TEXT,
+    moisture_requirements TEXT,
+    type TEXT,
+    image_url TEXT
   );
 
   CREATE TABLE IF NOT EXISTS orders (
@@ -36,5 +41,19 @@ db.exec(`
     FOREIGN KEY (plant_id) REFERENCES plants(id)
   );
 `);
+
+// Migrate existing databases to add new columns if missing
+const existingCols = db.prepare('PRAGMA table_info(plants)').all().map((c) => c.name);
+for (const [col, def] of [
+  ['description', 'TEXT'],
+  ['sun_requirements', 'TEXT'],
+  ['moisture_requirements', 'TEXT'],
+  ['type', 'TEXT'],
+  ['image_url', 'TEXT'],
+]) {
+  if (!existingCols.includes(col)) {
+    db.exec(`ALTER TABLE plants ADD COLUMN ${col} ${def}`);
+  }
+}
 
 module.exports = db;
