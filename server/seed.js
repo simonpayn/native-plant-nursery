@@ -93,10 +93,11 @@ const plants = [
   },
 ];
 
-// Clear existing data and reseed
-db.prepare('DELETE FROM order_items').run();
-db.prepare('DELETE FROM orders').run();
-db.prepare('DELETE FROM plants').run();
+const count = db.prepare('SELECT COUNT(*) as n FROM plants').get().n;
+if (count > 0) {
+  console.log(`Database already has ${count} plants, skipping seed.`);
+  process.exit(0);
+}
 
 const insert = db.prepare(`
   INSERT INTO plants (plant_name, common_name, availability_date, container_size, price, description, sun_requirements, moisture_requirements, type, image_url)
