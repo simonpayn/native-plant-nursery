@@ -127,19 +127,57 @@ a:hover {
   margin-bottom: 1rem;
 }
 
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
 .search-input {
-  width: 100%;
-  max-width: 400px;
   padding: 0.6rem 1rem;
   border: 2px solid #c8e6c9;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
+  min-width: 200px;
 }
 
 .search-input:focus {
   border-color: #2e7d32;
+}
+
+.filter-select {
+  padding: 0.6rem 1rem;
+  border: 2px solid #c8e6c9;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background: white;
+  color: #2d2d2d;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+  border-color: #2e7d32;
+}
+
+.clear-filters-btn {
+  background: none;
+  border: 2px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-filters-btn:hover {
+  border-color: #2e7d32;
+  color: #2e7d32;
 }
 
 .plant-grid {
@@ -164,9 +202,52 @@ a:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
+.plant-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
 .plant-card-body {
   padding: 1.25rem;
   flex: 1;
+}
+
+.plant-description {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.plant-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.plant-tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.plant-tag-type {
+  background: #ede7f6;
+  color: #4527a0;
+}
+
+.plant-tag-sun {
+  background: #fff9c4;
+  color: #f57f17;
+}
+
+.plant-tag-moisture {
+  background: #e3f2fd;
+  color: #1565c0;
 }
 
 .plant-common-name {
@@ -828,6 +909,12 @@ a:hover {
 
 .admin-form select.admin-input {
   appearance: auto;
+}
+
+.admin-textarea {
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
 }
 
 .admin-form-actions {

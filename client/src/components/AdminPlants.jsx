@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const emptyPlant = { plant_name: '', common_name: '', availability_date: '', container_size: '4-inch pot', price: '' };
+const emptyPlant = { plant_name: '', common_name: '', availability_date: '', container_size: '4-inch pot', price: '', description: '', sun_requirements: '', moisture_requirements: '', type: '', image_url: '' };
 
 export default function AdminPlants({ token }) {
   const [plants, setPlants] = useState([]);
@@ -102,6 +102,45 @@ export default function AdminPlants({ token }) {
             Price ($)
             <input className="admin-input" type="number" step="0.01" min="0" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
           </label>
+          <label>
+            Type
+            <select className="admin-input" value={form.type || ''} onChange={(e) => setForm({ ...form, type: e.target.value })}>
+              <option value="">— None —</option>
+              <option>Perennial</option>
+              <option>Annual</option>
+              <option>Grass</option>
+              <option>Shrub</option>
+              <option>Tree</option>
+              <option>Vine</option>
+            </select>
+          </label>
+          <label>
+            Sun Requirements
+            <select className="admin-input" value={form.sun_requirements || ''} onChange={(e) => setForm({ ...form, sun_requirements: e.target.value })}>
+              <option value="">— None —</option>
+              <option>Full Sun</option>
+              <option>Part Shade</option>
+              <option>Full Shade</option>
+            </select>
+          </label>
+          <label>
+            Moisture Requirements
+            <select className="admin-input" value={form.moisture_requirements || ''} onChange={(e) => setForm({ ...form, moisture_requirements: e.target.value })}>
+              <option value="">— None —</option>
+              <option>Dry</option>
+              <option>Medium</option>
+              <option>Moist</option>
+              <option>Wet</option>
+            </select>
+          </label>
+          <label>
+            Description
+            <textarea className="admin-input admin-textarea" value={form.description || ''} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} />
+          </label>
+          <label>
+            Image URL
+            <input className="admin-input" type="url" placeholder="https://..." value={form.image_url || ''} onChange={(e) => setForm({ ...form, image_url: e.target.value })} />
+          </label>
           {error && <p className="admin-error">{error}</p>}
           <div className="admin-form-actions">
             <button type="submit" className="submit-btn" disabled={saving}>
@@ -126,6 +165,9 @@ export default function AdminPlants({ token }) {
             <tr>
               <th>Common Name</th>
               <th>Scientific Name</th>
+              <th>Type</th>
+              <th>Sun</th>
+              <th>Moisture</th>
               <th>Size</th>
               <th>Available</th>
               <th>Price</th>
@@ -137,6 +179,9 @@ export default function AdminPlants({ token }) {
               <tr key={p.id}>
                 <td>{p.common_name}</td>
                 <td className="italic">{p.plant_name}</td>
+                <td>{p.type || '—'}</td>
+                <td>{p.sun_requirements || '—'}</td>
+                <td>{p.moisture_requirements || '—'}</td>
                 <td>{p.container_size}</td>
                 <td>{p.availability_date}</td>
                 <td>${Number(p.price).toFixed(2)}</td>

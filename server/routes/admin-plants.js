@@ -10,26 +10,26 @@ router.get('/', (req, res) => {
 
 // POST /api/admin/plants — create a plant
 router.post('/', (req, res) => {
-  const { plant_name, common_name, availability_date, container_size, price } = req.body;
+  const { plant_name, common_name, availability_date, container_size, price, description, sun_requirements, moisture_requirements, type, image_url } = req.body;
   if (!plant_name || !common_name || !availability_date || !container_size || price == null) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: 'Scientific name, common name, availability date, container size, and price are required' });
   }
   const result = db.prepare(
-    'INSERT INTO plants (plant_name, common_name, availability_date, container_size, price) VALUES (?, ?, ?, ?, ?)'
-  ).run(plant_name, common_name, availability_date, container_size, Number(price));
+    'INSERT INTO plants (plant_name, common_name, availability_date, container_size, price, description, sun_requirements, moisture_requirements, type, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+  ).run(plant_name, common_name, availability_date, container_size, Number(price), description || null, sun_requirements || null, moisture_requirements || null, type || null, image_url || null);
   const plant = db.prepare('SELECT * FROM plants WHERE id = ?').get(result.lastInsertRowid);
   res.status(201).json(plant);
 });
 
 // PUT /api/admin/plants/:id — update a plant
 router.put('/:id', (req, res) => {
-  const { plant_name, common_name, availability_date, container_size, price } = req.body;
+  const { plant_name, common_name, availability_date, container_size, price, description, sun_requirements, moisture_requirements, type, image_url } = req.body;
   if (!plant_name || !common_name || !availability_date || !container_size || price == null) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: 'Scientific name, common name, availability date, container size, and price are required' });
   }
   const result = db.prepare(
-    'UPDATE plants SET plant_name = ?, common_name = ?, availability_date = ?, container_size = ?, price = ? WHERE id = ?'
-  ).run(plant_name, common_name, availability_date, container_size, Number(price), req.params.id);
+    'UPDATE plants SET plant_name = ?, common_name = ?, availability_date = ?, container_size = ?, price = ?, description = ?, sun_requirements = ?, moisture_requirements = ?, type = ?, image_url = ? WHERE id = ?'
+  ).run(plant_name, common_name, availability_date, container_size, Number(price), description || null, sun_requirements || null, moisture_requirements || null, type || null, image_url || null, req.params.id);
   if (result.changes === 0) {
     return res.status(404).json({ error: 'Plant not found' });
   }
