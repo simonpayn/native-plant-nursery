@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for native-plant-nursery on 2026-02-27T20:18:21Z
+# fly.toml app configuration file generated for native-plant-nursery-udepmw on 2026-03-11T21:20:00Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'native-plant-nursery'
+app = 'native-plant-nursery-udepmw'
 primary_region = 'iad'
 
 [build]
