@@ -72,6 +72,11 @@ export default function OrdersDashboard() {
               <p>
                 Placed: {new Date(selectedOrder.created_at).toLocaleString()}
               </p>
+              <div className="order-contact-info">
+                <p><strong>Name:</strong> {selectedOrder.customer_name}</p>
+                <p><strong>Email:</strong> {selectedOrder.customer_email}</p>
+                <p><strong>Phone:</strong> {selectedOrder.customer_phone}</p>
+              </div>
               <div className="status-controls">
                 <span>Status:</span>
                 {['pending', 'processing', 'completed'].map((s) => (
