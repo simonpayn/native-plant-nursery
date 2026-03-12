@@ -69,7 +69,7 @@ Customer:
 Items:
 {{items}}
 
-Total: ${{total}}`
+Total: \${{total}}`
 );
 seedTemplate.run(
   'customer_order',
@@ -84,7 +84,7 @@ Date: {{date}}
 Items:
 {{items}}
 
-Total: ${{total}}
+Total: \${{total}}
 
 If you have any questions, just reply to this email.
 
