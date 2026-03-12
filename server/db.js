@@ -73,7 +73,7 @@ Total: \${{total}}`
 );
 seedTemplate.run(
   'customer_order',
-  'Order Confirmation #{{order_id}} — Native Plant Nursery',
+  'Order Confirmation #{{order_id}} — Haliburton Micromeadows',
   `Hi {{customer_name}},
 
 Thank you for your order! We've received it and will be in touch soon to arrange pickup or delivery.
@@ -86,9 +86,11 @@ Items:
 
 Total: \${{total}}
 
-If you have any questions, just reply to this email.
+If you have any questions, reply to this email or reach us at:
+  Phone: 705-933-4889 (call or text)
+  Email: haliburtonmm@gmail.com
 
-Native Plant Nursery`
+Haliburton Micromeadows`
 );
 
 // Migrate: add contact columns to existing orders table
