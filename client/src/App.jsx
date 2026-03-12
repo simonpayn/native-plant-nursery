@@ -14,10 +14,11 @@ export default function App() {
       <header className="header">
         <div className="header-content">
           <Link to="/" className="logo">
-            <span className="logo-icon">&#127793;</span>
-            Native Plant Nursery
+            <img src="/logo.png" alt="Haliburton Micromeadows logo" className="logo-img" />
+            Haliburton Micromeadows
           </Link>
           <nav className="nav">
+            <a href="https://haliburtonmicromeadows.ca/" className="nav-link">Home</a>
             <Link to="/" className="nav-link">Catalog</Link>
             <Link to="/orders" className="nav-link">Orders</Link>
             <Link to="/cart" className="nav-link cart-link">
@@ -36,6 +37,13 @@ export default function App() {
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
+      <footer className="footer">
+        <div className="footer-content">
+          <span className="footer-brand">Haliburton Micromeadows</span>
+          <span>Call or text: <a href="tel:7059334889">705-933-4889</a></span>
+          <span>Email: <a href="mailto:haliburtonmm@gmail.com">haliburtonmm@gmail.com</a></span>
+        </div>
+      </footer>
     </div>
   );
 }
