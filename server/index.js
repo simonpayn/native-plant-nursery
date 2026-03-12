@@ -11,9 +11,26 @@ const PORT = process.env.PORT || 3001;
 
 // Admin password — set via ADMIN_PASSWORD env var, defaults to 'admin'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
+// Secret for signing tokens — set via ADMIN_TOKEN_SECRET env var
+const TOKEN_SECRET = process.env.ADMIN_TOKEN_SECRET || 'default-secret-change-me';
 
-// Simple token store (in-memory, resets on restart)
-const adminTokens = new Set();
+function signToken(payload) {
+  return crypto.createHmac('sha256', TOKEN_SECRET).update(payload).digest('hex');
+}
+
+function makeToken() {
+  const payload = crypto.randomBytes(16).toString('hex');
+  const sig = signToken(payload);
+  return `${payload}.${sig}`;
+}
+
+function verifyToken(token) {
+  const dot = token.lastIndexOf('.');
+  if (dot === -1) return false;
+  const payload = token.slice(0, dot);
+  const sig = token.slice(dot + 1);
+  return crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(signToken(payload)));
+}
 
 app.use(cors());
 app.use(express.json());
@@ -22,9 +39,7 @@ app.use(express.json());
 app.post('/api/admin/login', (req, res) => {
   const { password } = req.body;
   if (password === ADMIN_PASSWORD) {
-    const token = crypto.randomBytes(32).toString('hex');
-    adminTokens.add(token);
-    res.json({ token });
+    res.json({ token: makeToken() });
   } else {
     res.status(401).json({ error: 'Invalid password' });
   }
@@ -33,7 +48,7 @@ app.post('/api/admin/login', (req, res) => {
 // Admin auth middleware
 function requireAdmin(req, res, next) {
   const auth = req.headers.authorization;
-  if (!auth || !auth.startsWith('Bearer ') || !adminTokens.has(auth.slice(7))) {
+  if (!auth || !auth.startsWith('Bearer ') || !verifyToken(auth.slice(7))) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   next();

@@ -5,16 +5,16 @@ import AdminOrders from './AdminOrders';
 import AdminTemplates from './AdminTemplates';
 
 export default function Admin() {
-  const [token, setToken] = useState(sessionStorage.getItem('adminToken') || '');
+  const [token, setToken] = useState(localStorage.getItem('adminToken') || '');
   const [tab, setTab] = useState('plants');
 
   function handleLogin(newToken) {
-    sessionStorage.setItem('adminToken', newToken);
+    localStorage.setItem('adminToken', newToken);
     setToken(newToken);
   }
 
   function handleLogout() {
-    sessionStorage.removeItem('adminToken');
+    localStorage.removeItem('adminToken');
     setToken('');
   }
 
