@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AdminLogin from './AdminLogin';
 import AdminPlants from './AdminPlants';
 import AdminOrders from './AdminOrders';
+import AdminTemplates from './AdminTemplates';
 
 export default function Admin() {
   const [token, setToken] = useState(sessionStorage.getItem('adminToken') || '');
@@ -34,8 +35,13 @@ export default function Admin() {
         <button className={`admin-tab ${tab === 'orders' ? 'active' : ''}`} onClick={() => setTab('orders')}>
           Orders
         </button>
+        <button className={`admin-tab ${tab === 'templates' ? 'active' : ''}`} onClick={() => setTab('templates')}>
+          Email Templates
+        </button>
       </div>
-      {tab === 'plants' ? <AdminPlants token={token} onLogout={handleLogout} /> : <AdminOrders token={token} onLogout={handleLogout} />}
+      {tab === 'plants' && <AdminPlants token={token} onLogout={handleLogout} />}
+      {tab === 'orders' && <AdminOrders token={token} onLogout={handleLogout} />}
+      {tab === 'templates' && <AdminTemplates token={token} onLogout={handleLogout} />}
     </div>
   );
 }

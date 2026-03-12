@@ -996,6 +996,57 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
+/* === Email Templates === */
+.vars-hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 1.25rem;
+  font-family: monospace;
+}
+
+.template-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #fafafa;
+}
+
+.template-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.template-card-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.template-subject {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.75rem;
+}
+
+.template-body {
+  font-family: monospace;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin: 0;
+  color: #333;
+}
+
+.save-confirmation {
+  color: #2a7a2a;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 /* === Responsive === */
 @media (max-width: 768px) {
   .dashboard-layout {
