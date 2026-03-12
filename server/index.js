@@ -49,8 +49,10 @@ app.use('/api/orders', ordersRouter);
 // Admin API routes (protected)
 const adminPlantsRouter = require('./routes/admin-plants');
 const adminOrdersRouter = require('./routes/admin-orders');
+const adminTemplatesRouter = require('./routes/admin-templates');
 app.use('/api/admin/plants', requireAdmin, adminPlantsRouter);
 app.use('/api/admin/orders', requireAdmin, adminOrdersRouter);
+app.use('/api/admin/templates', requireAdmin, adminTemplatesRouter);
 
 // Serve static frontend in production
 const clientBuild = path.join(__dirname, '..', 'client', 'dist');

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const { sendOrderEmails } = require('../email');
 
 // POST /api/orders — create a new order
 router.post('/', (req, res) => {
@@ -43,12 +44,20 @@ router.post('/', (req, res) => {
       insertItem.run(orderId, item.plant_id, item.quantity, item.unit_price);
     }
 
-    return { id: Number(orderId), total, status: 'pending' };
+    return { id: Number(orderId), total, status: 'pending', resolvedItems };
   });
 
   try {
-    const order = createOrder(items);
+    const { resolvedItems, ...order } = createOrder(items);
     res.status(201).json(order);
+    const fullOrder = { ...order, customer_name, customer_email, customer_phone };
+    const emailItems = resolvedItems.map((i) => ({
+      common_name: i.plant.common_name,
+      container_size: i.plant.container_size,
+      quantity: i.quantity,
+      unit_price: i.unit_price,
+    }));
+    sendOrderEmails(db, fullOrder, emailItems);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

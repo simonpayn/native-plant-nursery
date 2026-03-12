@@ -43,7 +43,53 @@ db.exec(`
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (plant_id) REFERENCES plants(id)
   );
+
+  CREATE TABLE IF NOT EXISTS email_templates (
+    name TEXT PRIMARY KEY,
+    subject TEXT NOT NULL,
+    body TEXT NOT NULL
+  );
 `);
+
+// Seed default email templates if missing
+const seedTemplate = db.prepare('INSERT OR IGNORE INTO email_templates (name, subject, body) VALUES (?, ?, ?)');
+seedTemplate.run(
+  'admin_order',
+  'New Order #{{order_id}} from {{customer_name}}',
+  `A new order has been placed.
+
+Order #{{order_id}}
+Date: {{date}}
+
+Customer:
+  Name:  {{customer_name}}
+  Email: {{customer_email}}
+  Phone: {{customer_phone}}
+
+Items:
+{{items}}
+
+Total: ${{total}}`
+);
+seedTemplate.run(
+  'customer_order',
+  'Order Confirmation #{{order_id}} — Native Plant Nursery',
+  `Hi {{customer_name}},
+
+Thank you for your order! We've received it and will be in touch soon to arrange pickup or delivery.
+
+Order #{{order_id}}
+Date: {{date}}
+
+Items:
+{{items}}
+
+Total: ${{total}}
+
+If you have any questions, just reply to this email.
+
+Native Plant Nursery`
+);
 
 // Migrate: add contact columns to existing orders table
 const columns = db.prepare("PRAGMA table_info(orders)").all().map(c => c.name);
